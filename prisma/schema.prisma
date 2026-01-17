@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String        @id @default(uuid())
+  name          String
+  walletAddress String        @unique
+  displayName   String?       // Custom admin tag
+  createdAt     DateTime      @default(now())
+  orders        OrderLog[]
+}
+
+model OrderLog {
+  id           Int      @id @default(autoincrement())
+  eventId      String
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  oid          BigInt
+  txHash       String?
+
+  status       String
+
+  coin         String
+  side         String
+  orderType    String
+  limitPx      String
+  sz           String
+  origSz       String
+  tif          String
+
+  cloid        String?
+  isTrigger    Boolean @default(false)
+  triggerPx    String?
+  reduceOnly   Boolean @default(false)
+
+  network      String   @default("hypercore-mainnet")
+  blockNumber  BigInt
+  blockTime    DateTime
+  localTime    DateTime
+  builder      String?
+
+  createdAt DateTime @default(now())
+
+  @@unique([eventId, status])
+  @@index([userId])
+  @@index([status])
+  @@index([coin])
+  @@index([blockTime])
+}
+
+model StatusFilter {
+  id        Int      @id @default(autoincrement())
+  status    String   @unique
+  enabled   Boolean  @default(true)
+  category  String
+
+  @@index([enabled])
+}
