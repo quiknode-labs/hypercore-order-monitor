@@ -19,6 +19,7 @@ Live order feed with rich order details powered by Server-Sent Events (SSE) - se
 ### **5. Complete Setup Automation**
 Pre-built scripts for **[Quicknode Streams](https://www.quicknode.com/streams)** setup and activation, plus Prisma migrations and database seeding - get up and running in minutes.
 
+![HyperCore Order Monitor Dashboard](./public/hypercore-order-monitor.png)
 
 ## Architecture
 
@@ -220,9 +221,9 @@ yarn run activate:streams
 
 Once configured, orders matching your filters will stream in real-time!
 
-## Screenshots
+## Video
 
-![HyperCore Order Monitor Dashboard](./public/hypercore-order-monitor.png)
+https://github.com/user-attachments/assets/4314c637-4546-45fe-a0f0-cfbe5f4b320c
 
 *Live order feed showing real-time trading activity from monitored Hyperliquid traders*
 
